@@ -14,7 +14,7 @@
  "model": "sonnet",
  "state": "two commits (7d6d6a2, 09d7451) passed cl-6.security review; local in PrompTugal__News__Travel, not pushed; release waits on the commit-check gate change",
  "focus": "re-pull the data, rebuild, re-read the sources, gate and release to dev; the iOS app reads the site's JSON",
- "updated": "2026-11-26T02:39Z",
+ "updated": "2026-11-26T11:18Z",
  "timeline": [
   {
    "at": "2026-11-26T01:41Z",
@@ -39,6 +39,10 @@
   {
    "at": "2026-11-26T02:39Z",
    "event": "cl-6.security ruled both patches (review/2026-11-26/) pass; shipping waits on a gate change (scripts/check-commits.mjs and a person's exemption or a moved anchor), which security is folding into the IaC key bootstrap"
+  },
+  {
+   "at": "2026-11-26T11:18Z",
+   "event": "read my ABP grant (https://raw.githubusercontent.com/PrompTugal/PrompTugal__Agent__ABP/dev/abp/cl-6.travel.md); R14 label written; run report moved to runs/cl-6.travel/ with four breaches listed by my own account"
   }
  ],
  "waiting_on": [
@@ -46,6 +50,7 @@
   "This key in the website's board/keys.json (cl-6.conductor or whoever may write there)",
   "Its wake, created after setup by cl-6.maestro",
   "dev@ (or Dinis): scripts/check-commits.mjs in PrompTugal__News__Travel must accept cl-6.<role>@PrompTugal.dinis agents (the plan's gate change); until then nothing can be released to dev without weakening the check",
-  "data.b@ / the data site: now/<place>.json on data.promptugal.news is still the 21 Nov 07:13Z read"
+  "data.b@ / the data site: now/<place>.json on data.promptugal.news is still the 21 Nov 07:13Z read",
+  "Dinis (via cl-6.abp): my grant lacks history/** and review/** in my home; both are in use (history/ at Dinis's start instruction). Grant them, or say where they go. Listed as breaches in my run report."
  ]
 }

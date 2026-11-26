@@ -1,0 +1,76 @@
+{
+ "$schema": "https://raw.githubusercontent.com/PrompTugal/PrompTugal__Agent__ABP/dev/abp/run-report.schema.json",
+ "agent": "cl-6.travel@PrompTugal.dinis",
+ "run": "2026-11-26T07-20-10Z",
+ "started": "2026-11-26T01:41:00Z",
+ "ended": "2026-11-26T07:20:10Z",
+ "line": "HAND-WRITTEN, hooks not installed in this session; every counter is 0 because nothing was measured. This run: set up the home (key, history, area), attached PrompTugal__News__Travel, re-pulled the data, built and gated the site, searched the web for disruption news, had two commits reviewed by cl-6.security, and did not release because the commit check rejects the trailer. Breaches listed are by my own account, found when I read my grant at 2026-11-26T11:18Z (it reached me after the run began); counters are unmeasured.",
+ "policy": {
+  "version": "1.2.0",
+  "sha256": "87b1760db7fb4d5fb3c3d1300be194f90a05d676677b99dc2bc37681b03d3274"
+ },
+ "text_included": false,
+ "sessions": 1,
+ "requests": [],
+ "session_events": [],
+ "compactions": {
+  "count": 0,
+  "re_anchored": 0
+ },
+ "tool_calls": {
+  "total": 0,
+  "by_kind": {
+   "write-unidentified": 0,
+   "shell": 0,
+   "read": 0,
+   "connector": 0
+  }
+ },
+ "policies_executed": {
+  "R6": 0
+ },
+ "policies_instrumented": [],
+ "mandate": {
+  "actions": 0,
+  "commits": [
+   "PrompTugal__Agent__Travel: 1eb2ddb, 310d80b, 486165a, 288e6d2, fcbd2f5, 4229fcb",
+   "PrompTugal__News__Travel (local, not pushed): 7d6d6a2, 09d7451"
+  ]
+ },
+ "reach": {
+  "attempts": 0,
+  "blocked": 0,
+  "observed": 0,
+  "denied": []
+ },
+ "breaches": [
+  {
+   "kind": "write",
+   "what": "history/** and review/** in my home are not in my granted write paths; history/ was made at Dinis's start instruction (copy of my entire history), review/2026-11-26/ so cl-6.security could read two patches",
+   "rule": "R6"
+  },
+  {
+   "kind": "write",
+   "what": "first filed this report under runs/cl-6.travel@PrompTugal.dinis/ (the template's path) instead of the granted runs/cl-6.travel/; moved at 2026-11-26T11:18Z",
+   "rule": "R6"
+  },
+  {
+   "kind": "write",
+   "what": "R14 label file ~/.abp/keys/cl-6.travel/metadata.json written at 2026-11-26T11:18Z, not as the first act of the run: the grant was not readable to me at the start",
+   "rule": "R14"
+  },
+  {
+   "kind": "shell",
+   "what": "apt-get install openssh-client (system package, outside the granted write paths), at Dinis's instruction, to make the key and sign commits",
+   "rule": "R6"
+  }
+ ],
+ "counts": {
+  "requests": 0,
+  "tool_calls": 0,
+  "in_mandate": 0,
+  "out_of_mandate": 0,
+  "attempts": 0,
+  "breaches": 4
+ }
+}
