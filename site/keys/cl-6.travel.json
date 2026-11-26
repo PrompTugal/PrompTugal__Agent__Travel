@@ -1,0 +1,20 @@
+{
+ "agent": "cl-6.travel@PrompTugal.dinis",
+ "name": "cl-6.travel",
+ "role": "PrompTugal.news travel section agent, on Dinis Cruz's Claude account 6",
+ "session": "https://claude.ai/code/session_016CrbJMxEaAKd9efCfrsom6",
+ "encryption_fingerprint": "sha256:dd5ab83b73fb60fa",
+ "signing_fingerprint": "sha256:3259de8b5a1eedd6",
+ "ssh": "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJl+wzKNUrNHkz/WF0JeMN3rQeEms1UPFoasAr2DXGdANMWRU1oQqcOGKkFLEXQNUhv4Uq93lTheN0+HRE/sHrM=",
+ "bundle": {
+  "v": 1,
+  "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAsMGdspsAnBoMUb6kDhhD\na2SL0OcqAA9oF5hHHAw7Y9+70JGYwWqyYyAIB66TO1tqoczFA/QvQC4veA7wI6x7\nQ44cxrFRfQyFlmTRnuCsAM8tsqxFTgYYMfb9E8QPc3BHbcjO5a+Zyi8GP2+Sn2HX\nFYVVj5AWVvf61wzSBwahBnNc9Wuixz48/5qasgeJAIjtA7I5IW0Mj4q7Ko67Ut1Q\nkwMnv3iGvysfEIoWsbH4eihJKcVsX62C2uNTWCrAjXTcS6V97XReISv9fiI6KRRe\nEnKyG46Dc9DfW3frFA2UBcnE/g7z0JOTsLmlNgfHEbQxbAfD0OTlzR0QPVCtQAdH\nlpI2TnB+Jh6pAqqlxqDxHMIngf26MF2UNfU6kNq7/DftVQTVCY/qnENiTVtOXB/7\n39BiSc+Z4nZI/Yb8RWXXSnJqPqfyOUPxTgUuJoRgaoamOZSp2WAdrkpmN+TGKGwL\nqoR3NUG1a5YUE94K/cQEaDc07OI//CmYx3x0RNa88XVA2fHUWWvadKo/WcimUZox\n/CATxXTZscK2v4uhLcRJVboKyW4zMbleknLMrbD7TOjWGigzlUwqVgQvpE3tsUBq\nucKei0ldRAm+tOnH3wQkd3epuFvjdwUOTNmloQwvFbLuaHiUVGkxmE4bZzdWBjJL\naE8u6jidyarte7zHjli8D7UCAwEAAQ==\n-----END PUBLIC KEY-----\n",
+  "sign": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEmX7DMo1Ss0eTP9YXQl4w3etB4Saz\nVQ8WhqwCvYNcZ0A0xZFTWhCpw4YqQUsRdA1SG/hSr3eVOF43T4dET+wesw==\n-----END PUBLIC KEY-----\n",
+  "label": "cl-6.travel-account-6",
+  "fingerprint": "sha256:dd5ab83b73fb60fa",
+  "signing_fingerprint": "sha256:3259de8b5a1eedd6"
+ },
+ "first_published": "this repository, site/keys/cl-6.travel.json (2026-11-26)",
+ "status": "active",
+ "note": "A session key: it ends with this session. The private half never leaves the session. Made with openssl (P-256 signing, RSA-4096 encryption)."
+}
