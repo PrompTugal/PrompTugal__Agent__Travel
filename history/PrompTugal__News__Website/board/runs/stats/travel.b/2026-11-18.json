@@ -1,0 +1,60 @@
+{
+ "agent": "travel.b@PrompTugal.dinis",
+ "date": "2026-11-18",
+ "model": "opus",
+ "cumulative_cost_usd": 30.8886,
+ "delta_cost_usd_since_15:30Z": 0.91,
+ "input_tokens": 786094,
+ "output_tokens": 294780,
+ "reads": [
+  {
+   "read_at": "2026-11-18T17:35Z",
+   "cumulative_cost_usd": 33.47,
+   "delta_cost_usd": 2.58,
+   "input_tokens": 892576,
+   "output_tokens": 313988
+  },
+  {
+   "read_at": "2026-11-18T18:45Z",
+   "cumulative_cost_usd": 33.47,
+   "delta_cost_usd": 0.0,
+   "input_tokens": 892576,
+   "output_tokens": 313988
+  },
+  {
+   "read_at": "2026-11-18T19:35Z",
+   "cumulative_cost_usd": 33.47,
+   "delta_cost_usd": 0.0,
+   "input_tokens": 892576,
+   "output_tokens": 313988
+  },
+  {
+   "read_at": "2026-11-18T20:35Z",
+   "cumulative_cost_usd": 42.67,
+   "delta_cost_usd": 9.2,
+   "input_tokens": 895207,
+   "output_tokens": 333131
+  },
+  {
+   "read_at": "2026-11-18T21:35Z",
+   "cumulative_cost_usd": 42.67,
+   "delta_cost_usd": 0.0,
+   "input_tokens": 895207,
+   "output_tokens": 333131
+  },
+  {
+   "read_at": "2026-11-18T22:35Z",
+   "cumulative_cost_usd": 46.56,
+   "delta_cost_usd": 3.89,
+   "input_tokens": 895850,
+   "output_tokens": 362950
+  },
+  {
+   "read_at": "2026-11-18T23:35Z",
+   "cumulative_cost_usd": 53.16,
+   "delta_cost_usd": 6.6,
+   "input_tokens": 897072,
+   "output_tokens": 421709
+  }
+ ]
+}

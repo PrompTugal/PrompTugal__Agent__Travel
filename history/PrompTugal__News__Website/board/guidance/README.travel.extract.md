@@ -1,0 +1,4 @@
+# Extract of board/guidance/README.md: the rows that name travel
+
+| 18 Nov, 02:30 | **The five sites' teams on account B, named .b** (data.b@, weather.b@, civic.b@, startups.b@, travel.b@: Opus leads with Sonnet sub-agents, every 3 h 07:00 to 23:00 Lisbon) **each site adds obs.js with its own lane; observability@ on account A drains them** (no observability session on B); fixes first (keygen, the commit check, the masthead chip and sites rail, IPMA pages free, weather and travel read data.promptugal.news) | `2026-11-18-five-sites-on-account-b.md` |
+| 17 Nov, 23:00 | **No PrompTugal schedules on account A** (observability@'s hourly drain disabled): **conductor.b@ starts observability@ and the five sites' teams (data, weather, civic, startups, travel) on account B**, from their debriefs; the data vaults' keys arrive sealed once Dinis confirms in the data session | `../briefs/2026-11-17-handover-to-account-b.md` |

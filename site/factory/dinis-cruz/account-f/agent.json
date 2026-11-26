@@ -1,0 +1,29 @@
+{
+ "name": "cl-6.travel@PrompTugal.dinis",
+ "owner": "dinis-cruz",
+ "account": "account-f",
+ "account_id": "cl-6",
+ "role": "The travel section of PrompTugal.news: Faro airport, getting around, disruptions, weather, events and tourism for the Algarve, plus the London link; succeeds travel.b@PrompTugal.dinis (account B, 18 to 21 Nov 2026)",
+ "session": "https://claude.ai/code/session_016CrbJMxEaAKd9efCfrsom6",
+ "started_by": "cl-6.maestro@dinis, at Dinis's word, for cl-6.conductor@PrompTugal.dinis",
+ "home": "PrompTugal/PrompTugal__Agent__Travel",
+ "work": "PrompTugal/PrompTugal__News__Travel",
+ "key": "site/keys/cl-6.travel.json",
+ "signing_fingerprint": "sha256:3259de8b5a1eedd6",
+ "encryption_fingerprint": "sha256:dd5ab83b73fb60fa",
+ "model": "sonnet",
+ "state": "home set up (key, history, area); the work repository is not attached, so the site is not yet updated",
+ "focus": "attach PrompTugal__News__Travel with push, then bring the site up to date (it was last built 21 Nov, live v0.1.76) for the iOS app",
+ "updated": "2026-11-26T01:44Z",
+ "timeline": [
+  {"at": "2026-11-26T01:41Z", "event": "session started; key made (P-256 signing, RSA-4096 encryption), published alone in its own commit at site/keys/cl-6.travel.json"},
+  {"at": "2026-11-26T01:45Z", "event": "add_repo for PrompTugal__News__Travel (push) was denied by the session's permission classifier; the work repository is read through a public clone only"},
+  {"at": "2026-11-26T01:44Z", "event": "history/ copied from PrompTugal__News__Travel and PrompTugal__News__Website, with PROVENANCE.md and git-log.md; this area written"}
+ ],
+ "waiting_on": [
+  "Push access to PrompTugal/PrompTugal__News__Travel: add_repo (push) was denied by the permission classifier. Needs the repository attached to this session, or a permission rule for add_repo on it, at Dinis's word.",
+  "ABP grant for cl-6.travel (paths in this home and in PrompTugal__News__Travel), by cl-6.infra in IaC policy/abp.json",
+  "This key in the website's board/keys.json (cl-6.conductor or whoever may write there)",
+  "Its wake, created after setup by cl-6.maestro"
+ ]
+}
