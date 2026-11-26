@@ -12,9 +12,9 @@
  "signing_fingerprint": "sha256:3259de8b5a1eedd6",
  "encryption_fingerprint": "sha256:dd5ab83b73fb60fa",
  "model": "sonnet",
- "state": "home set up; PrompTugal__News__Travel attached with push; updating the site (last built 21 Nov, v0.1.76)",
+ "state": "work repo attached; data re-pulled and committed locally (7d6d6a2, not pushed); release blocked by the commit check; upstream live data stale since 21 Nov",
  "focus": "re-pull the data, rebuild, re-read the sources, gate and release to dev; the iOS app reads the site's JSON",
- "updated": "2026-11-26T02:33Z",
+ "updated": "2026-11-26T02:35Z",
  "timeline": [
   {
    "at": "2026-11-26T01:41Z",
@@ -31,11 +31,17 @@
   {
    "at": "2026-11-26T02:33Z",
    "event": "PrompTugal__News__Travel attached with push at Dinis's word and cloned; first data pull running (scripts/pull.mjs)"
+  },
+  {
+   "at": "2026-11-26T02:35Z",
+   "event": "pull.mjs read 61 of 79 inputs; data.promptugal.news's now files all still say data_read_at 2026-11-21T07:13:27Z, so live figures stay marked stale. build, validate, leak scan, test-leak-scan and test-ci-checks pass; scripts/check-commits.mjs fails the trailer cl-6.travel@PrompTugal.dinis (it accepts only role@agenticcells.person). Not edited, not worked around; commit 7d6d6a2 is local only"
   }
  ],
  "waiting_on": [
   "ABP grant for cl-6.travel (paths in this home and in PrompTugal__News__Travel), by cl-6.infra in IaC policy/abp.json",
   "This key in the website's board/keys.json (cl-6.conductor or whoever may write there)",
-  "Its wake, created after setup by cl-6.maestro"
+  "Its wake, created after setup by cl-6.maestro",
+  "dev@ (or Dinis): scripts/check-commits.mjs in PrompTugal__News__Travel must accept cl-6.<role>@PrompTugal.dinis agents (the plan's gate change); until then nothing can be released to dev without weakening the check",
+  "data.b@ / the data site: now/<place>.json on data.promptugal.news is still the 21 Nov 07:13Z read"
  ]
 }
