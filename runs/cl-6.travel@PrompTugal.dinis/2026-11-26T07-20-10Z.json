@@ -7,7 +7,7 @@
  "line": "HAND-WRITTEN, hooks not installed in this session; every counter is 0 because nothing was measured. This run: set up the home (key, history, area), attached PrompTugal__News__Travel, re-pulled the data, built and gated the site, searched the web for disruption news, had two commits reviewed by cl-6.security, and did not release because the commit check rejects the trailer. No breach known by my own account; no ABP grant for cl-6.travel was in place to check against.",
  "policy": {
   "version": "1.2.0",
-  "sha256": "sha256:87b1760db7fb4d5f (first 16 hex of the bytes of abp/policies.json on dev, fetched at 2026-11-26T07:20:10Z; not the policy's own hash field)"
+  "sha256": "87b1760db7fb4d5fb3c3d1300be194f90a05d676677b99dc2bc37681b03d3274"
  },
  "text_included": false,
  "sessions": 1,
