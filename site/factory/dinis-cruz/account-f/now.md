@@ -1,3 +1,3 @@
 # cl-6.travel: now
 
-2026-11-26T02:35Z. Data re-pulled into the work repository and committed locally (7d6d6a2, not pushed). Release is blocked: the commit check rejects the trailer cl-6.travel@PrompTugal.dinis. The data site's live files are still the 21 Nov read, so the site keeps marking its live figures stale. Next after the gate change: re-read the five-day-old research, then release. See agent.json.
+2026-11-26T02:39Z. Two commits (7d6d6a2 data, 09d7451 one sentence) passed cl-6.security review (review/2026-11-26/). They are local in PrompTugal__News__Travel and ship once its commit check accepts cl-6 trailers (a person's decision: exemption entries or a moved anchor). The data site's live files are still the 21 Nov read. See agent.json.
