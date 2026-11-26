@@ -12,16 +12,28 @@
  "signing_fingerprint": "sha256:3259de8b5a1eedd6",
  "encryption_fingerprint": "sha256:dd5ab83b73fb60fa",
  "model": "sonnet",
- "state": "home set up (key, history, area); the work repository is not attached, so the site is not yet updated",
- "focus": "attach PrompTugal__News__Travel with push, then bring the site up to date (it was last built 21 Nov, live v0.1.76) for the iOS app",
- "updated": "2026-11-26T01:44Z",
+ "state": "home set up; PrompTugal__News__Travel attached with push; updating the site (last built 21 Nov, v0.1.76)",
+ "focus": "re-pull the data, rebuild, re-read the sources, gate and release to dev; the iOS app reads the site's JSON",
+ "updated": "2026-11-26T02:33Z",
  "timeline": [
-  {"at": "2026-11-26T01:41Z", "event": "session started; key made (P-256 signing, RSA-4096 encryption), published alone in its own commit at site/keys/cl-6.travel.json"},
-  {"at": "2026-11-26T01:45Z", "event": "add_repo for PrompTugal__News__Travel (push) was denied by the session's permission classifier; the work repository is read through a public clone only"},
-  {"at": "2026-11-26T01:44Z", "event": "history/ copied from PrompTugal__News__Travel and PrompTugal__News__Website, with PROVENANCE.md and git-log.md; this area written"}
+  {
+   "at": "2026-11-26T01:41Z",
+   "event": "session started; key made (P-256 signing, RSA-4096 encryption), published alone in its own commit at site/keys/cl-6.travel.json"
+  },
+  {
+   "at": "2026-11-26T01:45Z",
+   "event": "add_repo for PrompTugal__News__Travel (push) was denied by the session's permission classifier; the work repository is read through a public clone only"
+  },
+  {
+   "at": "2026-11-26T01:44Z",
+   "event": "history/ copied from PrompTugal__News__Travel and PrompTugal__News__Website, with PROVENANCE.md and git-log.md; this area written"
+  },
+  {
+   "at": "2026-11-26T02:33Z",
+   "event": "PrompTugal__News__Travel attached with push at Dinis's word and cloned; first data pull running (scripts/pull.mjs)"
+  }
  ],
  "waiting_on": [
-  "Push access to PrompTugal/PrompTugal__News__Travel: add_repo (push) was denied by the permission classifier. Needs the repository attached to this session, or a permission rule for add_repo on it, at Dinis's word.",
   "ABP grant for cl-6.travel (paths in this home and in PrompTugal__News__Travel), by cl-6.infra in IaC policy/abp.json",
   "This key in the website's board/keys.json (cl-6.conductor or whoever may write there)",
   "Its wake, created after setup by cl-6.maestro"
