@@ -1,0 +1,26 @@
+From 09d7451a41b7d231320d5229c4f2e2fedc0ac249 Mon Sep 17 00:00:00 2001
+From: "cl-6.travel" <cl-6.travel@PrompTugal.dinis>
+Date: Thu, 26 Nov 2026 02:36:21 +0000
+Subject: [PATCH 2/2] cl-6.travel@PrompTugal.dinis: disruptions re-checked 26
+ Nov, nothing newer found
+
+Agent: cl-6.travel@PrompTugal.dinis
+Claude-Session: https://claude.ai/code/session_016CrbJMxEaAKd9efCfrsom6
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+---
+ data/research/disruptions.json | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/data/research/disruptions.json b/data/research/disruptions.json
+index 532fe2b..ee9933f 100644
+--- a/data/research/disruptions.json
++++ b/data/research/disruptions.json
+@@ -12,7 +12,7 @@
+       "end": "2026-12-23",
+       "who": "SNPVAC (cabin crew union) and easyJet",
+       "where": "easyJet bases at Lisbon, Porto and Faro",
+-      "what": "The cabin crew union SNPVAC called off the five-day strike it had called for 19 to 23 December at easyJet's Lisbon, Porto and Faro bases. It did so on 18 November, after easyJet made a proposal in conciliation at DGERT. The union says this is a starting point for talks, not an agreement, and that it could call new action if the talks stall; meetings are set for 20, 23 and 25 November. No report of the 20 November meeting found by 19:55 UTC on 20 November. Flights on those dates should run as normal, but check with easyJet before you travel.",
++      "what": "The cabin crew union SNPVAC called off the five-day strike it had called for 19 to 23 December at easyJet's Lisbon, Porto and Faro bases. It did so on 18 November, after easyJet made a proposal in conciliation at DGERT. The union says this is a starting point for talks, not an agreement, and that it could call new action if the talks stall; meetings are set for 20, 23 and 25 November. No report of the 20 November meeting found by 19:55 UTC on 20 November. A web search at about 02:35 UTC on 26 November found no report of the 20, 23 or 25 November meetings and no new strike notice for the Algarve in December 2026; no new page was read. Flights on those dates should run as normal, but check with easyJet before you travel.",
+       "status": "called off",
+       "algarve": true,
+       "sources": [
