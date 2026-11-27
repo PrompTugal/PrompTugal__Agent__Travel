@@ -1,0 +1,53 @@
+diff --git a/.github/workflows/pages.yml b/.github/workflows/pages.yml
+index 1dcf2ff..e8f4dff 100644
+--- a/.github/workflows/pages.yml
++++ b/.github/workflows/pages.yml
+@@ -64,6 +64,8 @@ jobs:
+         run: node scripts/test-leak-scan.mjs
+       - name: CI check tests (trailer check, leak scan, this workflow)
+         run: node scripts/test-ci-checks.mjs
++      - name: Signature check tests
++        run: if [ -e scripts/test-check-signatures.mjs ]; then node scripts/test-check-signatures.mjs; fi
+       - if: steps.mode.outputs.deploy == 'true'
+         uses: actions/configure-pages@v5
+       - if: steps.mode.outputs.deploy == 'true'
+@@ -225,11 +227,14 @@ jobs:
+           mkdir -p scripts
+           # Written over the pushed copies only now that the tree and the disk are known to hold no symlink. A file A
+           # lacks is removed, so a pushed exemption or test cannot be used.
+-          for f in scripts/check-commits.mjs scripts/leak-scan.mjs scripts/test-leak-scan.mjs scripts/commit-exemptions.json; do
++          for f in scripts/check-commits.mjs scripts/check-signatures.mjs scripts/leak-scan.mjs scripts/test-leak-scan.mjs scripts/commit-exemptions.json; do
+             if git cat-file -e "$A:$f" 2>/dev/null; then git show "$A:$f" > "$f"; else rm -f "$f"; fi
+           done
+           # The bootstrap A has the old checkers: the base's copy runs only on the push that adds the new ones.
+           "$NODE_BIN" scripts/check-commits.mjs "$A" "$GITHUB_SHA"
++          # The signature check, from A's copy only (a pushed copy was replaced or removed above). A has none until the push
++          # that brings it, so it first judges the push after that one (cl-6.security's S18 ruling).
++          if [ -e scripts/check-signatures.mjs ]; then "$NODE_BIN" scripts/check-signatures.mjs "$A" "$GITHUB_SHA"; fi
+           if [ -e scripts/test-leak-scan.mjs ]; then "$NODE_BIN" scripts/test-leak-scan.mjs; fi
+       - name: "Check 8, before the download: nowhere to hide an old artifact"
+         if: needs.build.outputs.deploy == 'true'
+diff --git a/scripts/test-ci-checks.mjs b/scripts/test-ci-checks.mjs
+index bbec8d5..950cc96 100644
+--- a/scripts/test-ci-checks.mjs
++++ b/scripts/test-ci-checks.mjs
+@@ -459,6 +459,19 @@ if [ -e "$FIX/$key.json" ]; then cp "$FIX/$key.json" "$out"; printf 200; else ec
+       res.code === 0 && res.out.includes(`A-CHECKER-MARKER ${t.a} ${head(t.r)}`) && !res.out.includes('PUSHED') &&
+       !existsSync(join(t.r, 'scripts/commit-exemptions.json')) && !existsSync(join(t.r, 'scripts/test-leak-scan.mjs')) &&
+       readFileSync(join(t.r, 'scripts/check-commits.mjs'), 'utf8').includes('A-CHECKER-MARKER'), `${res.code} ${res.out}`);
++    // the signature check: run from A's copy, the pushed copy replaced; absent in A, a pushed copy is removed and not run
++    t = mkA(true); commit(t.r, 'A with a signature check', { files: { 'scripts/check-signatures.mjs': "console.log('A-SIG-MARKER', process.argv.slice(2).join(' '));\n" } }); const aSig = head(t.r);
++    commit(t.r, 'pushed', { files: { 'scripts/check-signatures.mjs': "console.log('PUSHED-SIG'); process.exit(1);\n" } });
++    env = mkEnv(t.r, { GITHUB_SHA: head(t.r) }); setAnchor(env, aSig);
++    const rs = runBlock(blk.c7, env);
++    check('c7: the signature check from A runs, with its marker, and the pushed copy is replaced',
++      rs.code === 0 && rs.out.includes(`A-SIG-MARKER ${aSig} ${head(t.r)}`) && !rs.out.includes('PUSHED-SIG') &&
++      readFileSync(join(t.r, 'scripts/check-signatures.mjs'), 'utf8').includes('A-SIG-MARKER'), `${rs.code} ${rs.out}`);
++    t = mkA(true); commit(t.r, 'pushed with its own signature check', { files: { 'scripts/check-signatures.mjs': "console.log('PUSHED-SIG'); process.exit(1);\n" } });
++    env = mkEnv(t.r, { GITHUB_SHA: head(t.r) }); setAnchor(env, t.a);
++    const rn = runBlock(blk.c7, env);
++    check('c7: with no signature check in A, a pushed one is removed and not run',
++      rn.code === 0 && !rn.out.includes('PUSHED-SIG') && !existsSync(join(t.r, 'scripts/check-signatures.mjs')), `${rn.code} ${rn.out}`);
+     t = mkA(false); commit(t.r, 'pushed', { files: { 'scripts/check-commits.mjs': "console.log('PUSHED-CHECKER');\n" } });
+     env = mkEnv(t.r, { GITHUB_SHA: head(t.r) }); setAnchor(env, t.a);
+     expectFail('c7: A without scripts/check-commits.mjs fails', runBlock(blk.c7, env), 'A has no scripts/check-commits.mjs');

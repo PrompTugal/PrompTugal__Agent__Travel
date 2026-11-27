@@ -1,8 +1,8 @@
 diff --git a/a/scripts/release.sh b/b/scripts/release.sh
-index 57a7d25..703dbfc 100755
+index 57a7d25..96230c2 100755
 --- a/a/scripts/release.sh
 +++ b/b/scripts/release.sh
-@@ -1,29 +1,61 @@
+@@ -1,29 +1,63 @@
  #!/usr/bin/env bash
 -# Run every gate, then rebase on dev and push. Stops at the first failure. Never pipe a gate.
 +# Run every gate, then release through the dev-gate: push the release commit to work/cl-6.travel, wait for the gate to
@@ -29,6 +29,7 @@ index 57a7d25..703dbfc 100755
 +  node scripts/test-leak-scan.mjs >/dev/null
 +  node scripts/test-ci-checks.mjs >/dev/null
 +  node scripts/check-commits.mjs origin/dev HEAD >/dev/null
++  if [ -e scripts/check-signatures.mjs ]; then node scripts/check-signatures.mjs origin/dev HEAD >/dev/null; fi
 +}
 +
  git fetch -q origin dev
@@ -41,6 +42,7 @@ index 57a7d25..703dbfc 100755
  node scripts/test-ci-checks.mjs
  node scripts/check-commits.mjs origin/dev HEAD
 -for i in 1 2 3 4 5; do
++if [ -e scripts/check-signatures.mjs ]; then node scripts/check-signatures.mjs origin/dev HEAD; fi
 +
 +for round in $(seq 1 "$ROUNDS"); do
 +  sha=$(git rev-parse HEAD); sha12=${sha:0:12}
