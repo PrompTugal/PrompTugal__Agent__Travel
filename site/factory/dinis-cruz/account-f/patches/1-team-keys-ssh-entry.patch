@@ -1,0 +1,30 @@
+diff --git a/team/keys.json b/team/keys.json
+index 4efed44..7961b2d 100644
+--- a/team/keys.json
++++ b/team/keys.json
+@@ -16,6 +16,25 @@
+         "signing_fingerprint": "sha256:53baa65c14af3ef1"
+       },
+       "status": "active"
++    },
++    {
++      "id": "cl-6.travel-ssh-signing",
++      "label": "cl-6.travel@PrompTugal.dinis, commit signing (Claude Code cloud session)",
++      "agent": "cl-6.travel@PrompTugal.dinis",
++      "role": "The travel section agent of PrompTugal.news",
++      "how": "Made by the agent in its own session on 26 November 2026 with openssl (P-256). Only the public half is in this file; the other half never leaves the session and ends with it. The same key is published in PrompTugal__Agent__Travel site/keys/cl-6.travel.json (first in its commit 1eb2ddb).",
++      "added": "2026-11-26",
++      "fingerprint": "sha256:3259de8b5a1eedd6",
++      "ssh": {
++        "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEmX7DMo1Ss0eTP9YXQl4w3etB4Saz\nVQ8WhqwCvYNcZ0A0xZFTWhCpw4YqQUsRdA1SG/hSr3eVOF43T4dET+wesw==\n-----END PUBLIC KEY-----",
++        "type": "ecdsa-sha2-nistp256",
++        "principals": [
++          "cl-6.travel@PrompTugal.dinis"
++        ],
++        "session_sha256": "daf71a9d33ed4849",
++        "from": "2026-11-26"
++      },
++      "session": "https://claude.ai/code/session_016CrbJMxEaAKd9efCfrsom6"
+     }
+   ]
+ }

@@ -1,0 +1,40 @@
+diff --git a/scripts/check-commits.mjs b/scripts/check-commits.mjs
+index c5df41c..c199a21 100644
+--- a/scripts/check-commits.mjs
++++ b/scripts/check-commits.mjs
+@@ -28,7 +28,8 @@ const all = lines(git('rev-list', ...range));          // merges included
+ const added = lines(git('rev-list', '--no-merges', ...range));
+ 
+ // A role may be dotted, role.speciality (Dinis, 16 Nov 2026: "we definitely should allow dots because that's our terminology").
+-const agentShape = /^[a-z0-9]+(?:[.-][a-z0-9]+)*@agenticcells\.[a-z0-9][a-z0-9.-]*$/i;
++// Also accepted (27 Nov 2026, cl-6.security's S18 ruling): cl-<n>.<role>@promptugal.dinis. Nothing else is loosened.
++const agentShape = /^(?:[a-z0-9]+(?:[.-][a-z0-9]+)*@agenticcells\.[a-z0-9][a-z0-9.-]*|cl-[0-9]+\.[a-z0-9]+(?:[.-][a-z0-9]+)*@promptugal\.dinis)$/i;
+ // Exemptions (specialist.code@, 2026-11-16). CI checks from the last release tag, so one failing commit
+ // would block every later release, and history is never rewritten. A person may exempt that one commit in
+ // scripts/commit-exemptions.json: [{ "commit": "<full 40-hex sha>", "reason": "...", "approved_by": "Dinis Cruz",
+@@ -61,7 +62,7 @@ for (const c of added) {
+   const agents = lines(git('log', '-1', '--format=%(trailers:key=Agent,valueonly)', c)).map((s) => s.trim());
+   const subject = git('log', '-1', '--format=%s', c);
+   if (!agents.length) errors.push(`${c.slice(0, 7)} ${subject}: no readable Agent: trailer (it must sit in the final trailer block)`);
+-  else if (!agents.every((a) => agentShape.test(a))) errors.push(`${c.slice(0, 7)} ${subject}: Agent: trailer is not role@agenticcells.person (${agents.join(', ')})`);
++  else if (!agents.every((a) => agentShape.test(a))) errors.push(`${c.slice(0, 7)} ${subject}: Agent: trailer is not role@agenticcells.person or cl-<n>.role@promptugal.dinis (${agents.join(', ')})`);
+ }
+ 
+ if (errors.length) {
+diff --git a/scripts/test-ci-checks.mjs b/scripts/test-ci-checks.mjs
+index bbec8d5..7eca767 100644
+--- a/scripts/test-ci-checks.mjs
++++ b/scripts/test-ci-checks.mjs
+@@ -70,6 +70,12 @@ const runChecker = (repo, script, before, after) => {
+   commit(repo, 'bare', { trailer: null, files: { 'c.txt': 'c' } });
+   r = runChecker(repo, script, base, 'HEAD');
+   check('a commit without an Agent trailer fails', r.code === 1 && /no readable Agent/.test(r.out), r.out);
++  for (const [name, ok] of [['cl-6.travel@PrompTugal.dinis', true], ['cl-12.dev.pages@promptugal.dinis', true], ['travel@PrompTugal.dinis', false], ['cl-6.travel@promptugal.dinis.evil.example', false], ['cl-6.travel@PrompTugal.example', false], ['cl-x.travel@PrompTugal.dinis', false], ['xcl-6.travel@PrompTugal.dinis', false], ['cl-6.@PrompTugal.dinis', false]]) {
++    const rr = newRepo(); const b = commit(rr, 'base', { files: { 'a.txt': 'a' } }); const sc = patched(b);
++    commit(rr, 'c', { trailer: `Agent: ${name}`, files: { 'b.txt': 'b' } });
++    const o = runChecker(rr, sc, b, 'HEAD');
++    check(`trailer ${name} ${ok ? 'passes' : 'fails'}`, ok ? o.code === 0 : o.code === 1, o.out);
++  }
+ }
+ {
+   const repo = newRepo();
