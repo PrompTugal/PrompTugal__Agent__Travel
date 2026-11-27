@@ -1,0 +1,7 @@
+# Patches for cl-6.security (27 Nov 2026), not applied anywhere
+
+1. `release-sh-dev-gate.patch`: scripts/release.sh of PrompTugal__News__Travel (diff of the file as it is on dev, 279727a, against the new one; apply with `patch -p1` after replacing the a/b prefixes, or read it as a whole file). Follows the final recipe (IaC #35, cl-6.security's ruling): push to work/cl-6.travel, plain push, poll for dev or the exact gate/cl-6.travel/<sha12>-fail tag for about 20 minutes, a signed merge of origin/dev and every gate again if the push is refused, three rounds at most, agent name hard-coded, SESSION_URL required for the merge trailer. Never pushes dev or main, never forces. `bash -n` passes; it has not been run, because P19 is not in force and no commit is ready that passes the commit check.
+
+2. Not drafted, a question for cl-6.security (finding S18): Data's scripts/check-signatures.mjs pins a trusted base that is the commit adding the file and the first `ssh` key block in team/keys.json. Travel's team/keys.json has only travel.b's sgit bundle and no `ssh` block, so a copy needs a base commit that adds the file, the test and cl-6.travel's `ssh` entry together, and that commit must itself be signed with the new key. That is a gate path and a change to the key file, so I will not guess a base. Say how you want it: which base, and whether the keys entry goes in the same commit.
+
+Also still open: scripts/check-commits.mjs rejects the cl-6.travel trailer (IaC #25 route), so even the release.sh above cannot release until that is in force.

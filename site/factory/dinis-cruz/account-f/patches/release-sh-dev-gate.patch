@@ -1,0 +1,81 @@
+diff --git a/a/scripts/release.sh b/b/scripts/release.sh
+index 57a7d25..703dbfc 100755
+--- a/a/scripts/release.sh
++++ b/b/scripts/release.sh
+@@ -1,29 +1,61 @@
+ #!/usr/bin/env bash
+-# Run every gate, then rebase on dev and push. Stops at the first failure. Never pipe a gate.
++# Run every gate, then release through the dev-gate: push the release commit to work/cl-6.travel, wait for the gate to
++# put it on dev (or refuse it). Stops at the first failure. Never pipe a gate. Never pushes dev or main; never forces.
++# The recipe: IaC #35 and cl-6.security's ruling (26 to 27 Nov 2026). Needs SESSION_URL (this session's Claude-Session).
+ set -euo pipefail
+ cd "$(dirname "$0")/.."
+-# Refuse during a hold (finding 3), with uncommitted changes (finding 4: the gates must check what is
+-# pushed), and check every commit's Agent: trailer before the push, while it can still be amended (finding 5).
++AGENT="cl-6.travel"
++AGENT_FULL="cl-6.travel@PrompTugal.dinis"
++WORK="work/${AGENT}"
++ROUNDS=3          # push attempts, each after a signed merge of origin/dev
++POLLS=14          # polls of about 90 seconds each: about 20 minutes
+ [ -e board/HOLD.md ] && { echo "board/HOLD.md exists: no release while it does" >&2; exit 1; }
++[ -n "${SESSION_URL:-}" ] || { echo "set SESSION_URL to this session's Claude-Session URL" >&2; exit 1; }
+ [ -z "$(git status --porcelain)" ] || { echo "uncommitted changes: commit or stash them first" >&2; exit 1; }
++
++gates() {
++  # One gate per line: under set -e a failure inside an && chain does not stop the script.
++  node scripts/build.mjs >/dev/null
++  node scripts/validate.mjs >/dev/null
++  node scripts/leak-scan.mjs >/dev/null
++  node scripts/test-leak-scan.mjs >/dev/null
++  node scripts/test-ci-checks.mjs >/dev/null
++  node scripts/check-commits.mjs origin/dev HEAD >/dev/null
++}
++
+ git fetch -q origin dev
++# Step 1: the release commits sit on top of origin/dev. They are local and unpublished, so a rebase rewrites nothing shared.
++git rebase -q origin/dev
+ node scripts/build.mjs
+ node scripts/validate.mjs
+ node scripts/leak-scan.mjs
+ node scripts/test-leak-scan.mjs
+ node scripts/test-ci-checks.mjs
+ node scripts/check-commits.mjs origin/dev HEAD
+-for i in 1 2 3 4 5; do
++
++for round in $(seq 1 "$ROUNDS"); do
++  sha=$(git rev-parse HEAD); sha12=${sha:0:12}
++  # Step 2: a plain push to the work branch. Never force.
++  if git push -q origin "HEAD:refs/heads/${WORK}"; then
++    # Step 3: wait for the gate: dev equals our sha (released) or the exact -fail tag (refused).
++    for i in $(seq 1 "$POLLS"); do
++      d=$(git ls-remote origin refs/heads/dev | cut -f1)
++      [ "$d" = "$sha" ] && { echo "released ${sha12} to dev through ${WORK}"; exit 0; }
++      if git ls-remote --tags origin "gate/${AGENT}/*" | grep -q "refs/tags/gate/${AGENT}/${sha12}-fail\$"; then
++        echo "the gate refused ${sha12} (tag gate/${AGENT}/${sha12}-fail): stop and report" >&2; exit 1
++      fi
++      sleep 90
++    done
++    echo "no answer from the gate for ${sha12} after about 20 minutes: stop and report" >&2; exit 1
++  fi
++  # Step 4: the push was refused as a non-fast-forward (something else moved dev or the work branch):
++  # merge origin/dev with a signed merge commit, run every gate again, and push again. Never rewrite history.
++  echo "push refused (round ${round}); merging origin/dev" >&2
+   git fetch -q origin dev
+-  git rebase -q origin/dev
+-  # One gate per line: under set -e a failure inside an && chain does not stop the script (specialist.code@ finding 1).
+-  node scripts/build.mjs >/dev/null
+-  node scripts/validate.mjs >/dev/null
+-  node scripts/leak-scan.mjs >/dev/null
+-  node scripts/test-leak-scan.mjs >/dev/null
+-  node scripts/test-ci-checks.mjs >/dev/null
+-  node scripts/check-commits.mjs origin/dev HEAD >/dev/null
+-  if git -c push.negotiate=true push -q origin HEAD:dev; then echo "released $(git rev-parse --short HEAD) to dev"; exit 0; fi
+-  sleep $((i * 3))
++  git merge -q --no-ff -S -m "${AGENT_FULL}: merge origin/dev before release
++
++Agent: ${AGENT_FULL}
++Claude-Session: ${SESSION_URL}" origin/dev
++  gates
+ done
+-echo "release failed after 5 attempts" >&2; exit 1
++echo "release failed after ${ROUNDS} rounds" >&2; exit 1
